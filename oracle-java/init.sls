@@ -7,6 +7,8 @@ webupd8team-java:
     - require_in:
       - pkg: oracle-java{{ java.version }}-installer
       - pkg: oracle-java{{ java.version }}-set-default
+    - notify:
+      - cmd: accept_licence
 
 
 oracle-java{{ java.version }}-installer:
@@ -19,11 +21,17 @@ oracle-java{{ java.version }}-set-default:
     - pkg: oracle-java{{ java.version }}-installer
 
 accept_licence:
-  cmd.run:
+  cmd.wait:
     - name: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
     - require_in:
       - pkg: oracle-java{{ java.version }}-installer
 
 
-
-#
+jssecacerts:
+  file.managed:
+    - name: /usr/lib/jvm/java-8-oracle/jre/lib/security/jssecacerts
+    - source: salt://magnolia/jssecacerts
+    - user: root
+    - makedirs: True
+    - require:
+      - pkg: oracle-java{{ java.version }}-installer
