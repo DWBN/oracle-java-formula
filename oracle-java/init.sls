@@ -21,10 +21,11 @@ oracle-java{{ java.version }}-set-default:
     - pkg: oracle-java{{ java.version }}-installer
 
 accept_licence:
-  cmd.wait:
+  cmd.run:
     - name: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
     - require_in:
       - pkg: oracle-java{{ java.version }}-installer
+    - creates: /usr/lib/jvm/java-8-oracle
 
 
 jssecacerts:
