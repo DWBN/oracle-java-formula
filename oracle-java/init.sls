@@ -30,8 +30,7 @@ accept_licence:
 jssecacerts:
   file.managed:
     - name: /usr/lib/jvm/java-8-oracle/jre/lib/security/jssecacerts
-    - source: salt://magnolia/jssecacerts
+    - source: salt://oracle-java/jssecacerts
     - user: root
-    - makedirs: True
     - require:
       - pkg: oracle-java{{ java.version }}-installer
