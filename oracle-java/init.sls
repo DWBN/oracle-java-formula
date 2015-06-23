@@ -28,10 +28,13 @@ accept_licence:
     - creates: /usr/lib/jvm/java-8-oracle
 
 
-jssecacerts:
-  file.managed:
-    - name: /usr/lib/jvm/java-8-oracle/jre/lib/security/jssecacerts
-    - source: salt://oracle-java/jssecacerts
-    - user: root
-    - require:
-      - pkg: oracle-java{{ java.version }}-installer
+
+
+
+#jssecacerts:
+#  file.managed:
+#    - name: /usr/lib/jvm/java-8-oracle/jre/lib/security/jssecacerts
+#    - source: salt://oracle-java/jssecacerts
+#    - user: root
+#    - require:
+#      - pkg: oracle-java{{ java.version }}-installer
